@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Web Mining</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        header {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .chapter {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .chapter:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h2 i {
+            color: #b21f1f;
+        }
+        
+        p, ul {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul {
+            margin-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, rgba(253, 187, 45, 0.2) 0%, rgba(178, 31, 31, 0.2) 100%);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #fdbb2d;
+            margin: 20px 0;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        h3 {
+            color: #b21f1f;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h3 i {
+            color: #1a2a6c;
+        }
+        
+        .references {
+            background: #1a2a6c;
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        
+        .references h2 {
+            color: white;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .ref-link {
+            color: #fdbb2d;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .ref-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #1a2a6c;
+            color: white;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .code {
+            font-family: 'Courier New', monospace;
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="#" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h1>Web Mining</h1>
+            <p class="subtitle">Pengantar, Teknik, dan Penerapan dalam Pengembangan Web</p>
+        </header>
+        
+        <div class="content">
+            <div class="chapter">
+                <h2><i class="fas fa-user"></i> Profil</h2>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3><i class="fas fa-id-card"></i> Identitas</h3>
+                        <ul>
+                            <li><strong>Nama:</strong> YOEL FLEMMING</li>
+                            <li><strong>NIM:</strong> 230411100046</li>
+                            <li><strong>Email:</strong> 230411100046@student.trunojoyo.ac.id</li>
+                            <li><strong>Tempat/Tahun Lahir:</strong> Doloksanggul, Sumatra Utara, 2004</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-user-graduate"></i> Tentang Saya</h3>
+                        <p>Saya bernama Yoel Flemming, lahir di Doloksanggul, Sumatra Utara, pada tahun 2004. Sejak kecil saya sudah memiliki rasa ingin tahu yang tinggi terhadap teknologi dan informasi, terutama bagaimana data dapat diolah menjadi pengetahuan yang bermanfaat.</p>
+                        <p>Selama masa studi, saya mulai tertarik mendalami bidang Web Mining—sebuah cabang ilmu yang berfokus pada pencarian, penggalian, dan penambangan data dari berbagai sumber web. Bagi saya, dunia internet bukan hanya sekadar ruang berbagi informasi, tetapi juga lautan data yang sangat berharga untuk diteliti dan dimanfaatkan.</p>
+                        <p>Seiring waktu, minat ini berkembang menjadi jenjang karir yang saya pilih, yaitu di bidang pencarian dan penambangan web. Saya bercita-cita untuk menjadi seorang profesional yang mampu mengolah data web menjadi informasi yang strategis, baik untuk kebutuhan riset, bisnis, maupun pengembangan teknologi berbasis kecerdasan buatan.</p>
+                        <p>Dengan latar belakang asal daerah yang sederhana, saya ingin membuktikan bahwa siapa pun bisa memberikan kontribusi besar dalam dunia teknologi, asal memiliki semangat belajar, konsistensi, dan tekad yang kuat.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chapter">
+                <h2><i class="fas fa-book-open"></i> Pengantar Web Mining</h2>
+                <p>Penambangan web adalah penggunaan teknik penambangan data untuk secara otomatis menemukan dan mengekstrak informasi dari dokumen dan layanan Web. Web mining merupakan ekstraksi pola-pola penting dan bermanfaat namun tersimpan secara implisit pada kumpulan data yang relatif besar pada layanan world wide web.</p>
+                
+                <p>Web mining terdiri atas tiga bagian yaitu: web content mining, web structure mining, dan web usage mining. Teknik web mining pertama kali dikenalkan oleh Etzioni Oren pada tahun 1996.</p>
+                
+                <div class="highlight">
+                    <p>Web mining dapat didefinisikan sebagai suatu usaha untuk mengimplementasikan teknik data mining untuk menggali dan kemudian mengkaji atau mengekstraksi informasi yang berguna dari data yang tersimpan di web secara otomatis.</p>
+                </div>
+                
+                <p>Dalam implementasinya web mining hampir mirip akar terminologinya dengan data mining tetapi pada dasarnya ada sedikit perbedaan. Perbedaan web mining yaitu memiliki hubungan sifat data yang tidak terstruktur dan sumber data yang tidak tersimpan dalam suatu data warehouse melainkan tersebar di berbagai sumber.</p>
+            </div>
+            
+            <div class="chapter">
+                <h2><i class="fas fa-sitemap"></i> Teknik Web Mining</h2>
+                
+                <div class="grid-2">
+                    <div class="card">
+                        <h3><i class="fas fa-file-alt"></i> Web Content Mining</h3>
+                        <p>Web Content Mining adalah suatu proses otomatis untuk menemukan informasi yang berguna dari dokumen atau data. Pada prinsipnya teknik ini mengekstraksi kata kunci yang terkandung pada dokumen.</p>
+                        <p>Teknik Web Content Mining berfokus pada penggalian informasi dari isi (content) yang ada pada sebuah web, seperti teks, gambar, audio, video, metadata dan hyperlink.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-link"></i> Web Structure Mining</h3>
+                        <p>Web Structure Mining adalah teknik yang digunakan untuk menemukan struktur link dari hyperlink sehingga dapat diketahui keterkaitan antara suatu halaman web dengan halaman web lainnya, kemudian akan digunakan untuk membangun rangkuman website dan halaman web.</p>
+                        <p>Kategori kedua dari Web Mining ini berfokus pada penggalian informasi dari struktur yang disajikan dalam web.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-chart-line"></i> Web Usage Mining</h3>
+                        <p>Kategori ketiga dari Web Mining adalah Web Usage Mining. Model ini merupakan teknik yang selalu mengedepankan penggalian pada pola (pattern) dari pengguna (user) dalam mengakses halaman-halaman web yang ditandai melalui informasi dari log, click stream, cookies, dan query.</p>
+                        <p>Manfaat web usage mining adalah untuk melakukan perubahan halaman berdasarkan profil pengguna, menentukan ketertarikan pelanggan terhadap produk tertentu, dan menentukan target market yang sesuai.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-spider"></i> Web Crawling</h3>
+                        <p>Web crawling adalah salah satu fungsi kerja dari alat mesin pencarian untuk menemukan informasi yang relevan dengan kebutuhan pengguna. Inilah alasan mengapa Google dapat memberikan jawaban dari pertanyaan yang kamu cari dengan cepat.</p>
+                        <p>Web crawling adalah gabungan dari dua kata yaitu web dan crawling. Jadi, pengertian web crawling adalah suatu proses penelusuran website atau situs dengan alat bernama crawler. Adapun tujuan web crawling adalah identifikasi halaman agar mesin pencarian dapat memasukkannya dalam kategori hingga memudahkan pencarian.</p>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-code"></i> Menu Crawling: Springer Titles Scraper</h3>
+                        <p>Berikut implementasi untuk mengumpulkan judul artikel dari hasil pencarian di Springer berdasarkan beberapa kata kunci, lalu menyimpannya ke CSV.</p>
+                        <p><strong>1. Import Library</strong></p>
+                        <ul>
+                            <li><strong>requests</strong> → mengambil halaman web.</li>
+                            <li><strong>BeautifulSoup</strong> → parsing HTML.</li>
+                            <li><strong>pandas</strong> → membuat tabel dan menyimpan CSV.</li>
+                        </ul>
+                        <p><strong>2. Daftar Kata Kunci</strong>: <code>["web mining", "web usage mining", "data mining"]</code></p>
+                        <p><strong>3–5. Proses</strong>: untuk tiap kata kunci, bentuk URL pencarian, ambil HTML, ekstrak semua elemen <code>&lt;h2&gt;</code> sebagai judul.</p>
+                        <p><strong>6. Simpan ke CSV</strong>: satu file per kata kunci di folder <code>data/</code>.</p>
+                        <div class="code"><pre>import os
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+# 1) Import Library sudah di atas
+# 2) Daftar Kata Kunci
+keywords = ["web mining", "web usage mining", "data mining"]
+
+# Siapkan folder output
+os.makedirs("data", exist_ok=True)
+
+all_rows = []
+for key in keywords:
+    # 3) Bentuk URL pencarian
+    url = f"https://www.springernature.com/gp/search?query={key.replace(' ', '+')}"
+
+    # 4) Ambil halaman web
+    response = requests.get(url, timeout=30)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    # 5) Ambil judul artikel (elemen &lt;h2&gt;)
+    titles = [t.get_text(strip=True) for t in soup.find_all("h2")]
+
+    # 6) Simpan ke CSV per kata kunci
+    df = pd.DataFrame({"Judul Artikel": titles})
+    out_path = f"data/{key.replace(' ', '')}.csv"
+    df.to_csv(out_path, index=False)
+
+    # Kumpulan semua judul (opsional)
+    for title in titles:
+        all_rows.append({"keyword": key, "judul": title})
+
+# Simpan gabungan semua judul dari semua kata kunci (opsional)
+pd.DataFrame(all_rows).to_csv("data/semua_judul.csv", index=False)</pre></div>
+                        <p><strong>Contoh output CSV</strong> (webmining.csv):</p>
+                        <div class="code"><pre>Judul Artikel
+Advances in Web Mining Techniques
+Applications of Web Usage Mining in E-Commerce
+Web Mining: State-of-the-Art Approaches</pre></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter">
+                <h2><i class="fas fa-database"></i> Web Data Preprocessing</h2>
+                <p>Berikut langkah-langkah utama dari data preprocessing :</p>
+                
+                <div class="grid-2">
+                    <div class="card">
+                        <h3><i class="fas fa-broom"></i> Data Cleaning</h3>
+                        <p>Data Cleaning berfungsi untuk mengganti missing value, menormalkan data yang bermasalah (Noisy), mengindentifikasi dan menghilangkan data yang tidak konsisten dan data yang berulang (Redundancy) yang didapat dari integrasi data, dan menyelesaikan masalah inconsistensi data.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-object-group"></i> Data Integration</h3>
+                        <p>Data Integration berfungsi untuk mengabungkan beberapa database dan file menjadi 1 sehingga menghasilkan sumber data yang besar.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-exchange-alt"></i> Data Transformation</h3>
+                        <p>Data Transformation Berfungsi untuk menormalisasikan data dan aggresi data. Data transformation biasanya digunakan untuk mengubah data dalam bentuk yang sesuai dalam proses data mining.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-compress-arrows-alt"></i> Data Reduction</h3>
+                        <p>Data Reduction berfungsi untuk mengurangi volume data yang berlebihan tetapi tetap mempertahankan kualitas dari hasil analisis data. Oleh karena itu, perlu adanya teknik data reduction dengan tujuan untuk meningkatkan efisiensi penyimpanan serta mengurangi biaya penyimpanan dan analisis data.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-chart-pie"></i> Data Discretization</h3>
+                        <p>Data Discretization berfungsi sebagai bagian dari data reduction dengan memperhitungkan data yang signifikan (Data Numeric).</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter">
+                <h2><i class="fas fa-brain"></i> Machine Learning dalam Web Mining</h2>
+                
+                <div class="grid-2">
+                    <div class="card">
+                        <h3><i class="fas fa-graduation-cap"></i> Supervised Learning</h3>
+                        <p>Supervised learning adalah jenis algoritma machine learning yang belajar dari data berlabel. Data berlabel adalah data yang telah ditandai dengan jawaban atau klasifikasi yang benar.</p>
+                        <p>Supervised learning terbagi menjadi dua kategori algoritma:</p>
+                        <ul>
+                            <li><strong>Regresi:</strong> Digunakan untuk memprediksi nilai kontinu, seperti harga rumah atau harga saham.</li>
+                            <li><strong>Klasifikasi:</strong> Digunakan untuk memprediksi nilai kategorikal, seperti apakah email termasuk spam atau bukan.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-project-diagram"></i> Unsupervised Learning</h3>
+                        <p>Unsupervised learning adalah jenis machine learning yang belajar dari data tidak berlabel. Data tidak berlabel berarti data tidak memiliki label atau kategori yang telah ada sebelumnya.</p>
+                        <p>Unsupervised learning terbagi menjadi dua kategori algoritma:</p>
+                        <ul>
+                            <li><strong>Clustering:</strong> Digunakan untuk mengelompokkan data yang serupa.</li>
+                            <li><strong>Association:</strong> Digunakan untuk mengidentifikasi pola dalam data.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter">
+                <h2><i class="fas fa-rocket"></i> Deployment System</h2>
+                <p>Deployment adalah proses penerapan atau penempatan suatu aplikasi, sistem, solusi, atau teknologi ke dalam lingkungan operasional yang sesungguhnya setelah melalui tahap pengembangan (development).</p>
+                
+                <p>Proses deployment melibatkan penempatan aplikasi atau sistem ke dalam lingkungan produksi atau operasional yang biasanya berbeda dari lingkungan pengembangan atau pengujian.</p>
+                
+                <div class="highlight">
+                    <p>Tujuan deployment secara keseluruhan, tujuan utama dari deployment adalah membuat aplikasi atau sistem tersedia untuk pengguna akhir (end-user) sehingga mereka dapat memanfaatkannya sesuai dengan kebutuhan.</p>
+                </div>
+            </div>
+            
+            <div class="chapter references">
+                <h2><i class="fas fa-link"></i> Referensi</h2>
+                <ul>
+                    <li><a href="https://www.jagoanhosting.com/blog/web-crawling-adalah/" class="ref-link" target="_blank">https://www.jagoanhosting.com/blog/web-crawling-adalah/</a></li>
+                    <li><a href="https://www.researchgate.net/publication/2378016_Web_Mining_Research_A_Survey" class="ref-link" target="_blank">https://www.researchgate.net/publication/2378016_Web_Mining_Research_A_Survey</a></li>
+                    <li><a href="https://sis.binus.ac.id/2021/08/04/apa-itu-web-mining/" class="ref-link" target="_blank">https://sis.binus.ac.id/2021/08/04/apa-itu-web-mining/</a></li>
+                    <li><a href="https://sis.binus.ac.id/2021/10/13/langkah-langkah-utama-data-preprocessing/" class="ref-link" target="_blank">https://sis.binus.ac.id/2021/10/13/langkah-langkah-utama-data-preprocessing/</a></li>
+                    <li><a href="https://sis.binus.ac.id/2024/10/24/supervised-vs-unsupervised-learning/" class="ref-link" target="_blank">https://sis.binus.ac.id/2024/10/24/supervised-vs-unsupervised-learning/</a></li>
+                    <li><a href="https://www.dicoding.com/blog/deployment-pengertian-tujuan-dan-jenis-jenisnya/" class="ref-link" target="_blank">https://www.dicoding.com/blog/deployment-pengertian-tujuan-dan-jenis-jenisnya/</a></li>
+                </ul>
+            </div>
+            
+            <div class="nav-buttons">
+                <a href="#" class="nav-btn">
+                    <i class="fas fa-arrow-left"></i> Halaman Sebelumnya
+                </a>
+                <a href="#" class="nav-btn">
+                    Halaman Selanjutnya <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 Web Mining - All Rights Reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animasi untuk munculnya konten
+        document.addEventListener('DOMContentLoaded', function() {
+            const chapters = document.querySelectorAll('.chapter');
+            chapters.forEach((chapter, index) => {
+                setTimeout(() => {
+                    chapter.style.opacity = 1;
+                    chapter.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+        
+        // Inisialisasi style awal untuk animasi
+        const chapters = document.querySelectorAll('.chapter');
+        chapters.forEach(chapter => {
+            chapter.style.opacity = 0;
+            chapter.style.transform = 'translateY(20px)';
+            chapter.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+    </script>
+</body>
+</html>
